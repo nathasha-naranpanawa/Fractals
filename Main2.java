@@ -62,22 +62,89 @@ public class Main2 extends JPanel {
 		int length = args.length;
 		for(int i=0;i<length;i++){
 			if (args[i].equals("Julia")) {
-				String cons2 = args[length-1];
-				
-				String [] s = cons2.split("\\+");
+				String num = args[length-1];
+				char realsign = '\0';
+		char imagsign = '\0';
+	
+	//String real="";
+	//String imag ="";
+	for (int j = 0; j < num.length(); j++) 
+    {
+	char a = num.charAt(j);
+      
+        if(a =='+'){
+			if(j==0){ 
+				realsign = a;
+			}else{
+				imagsign=a;
+			}
+		  
+        }else if(a=='-'){
+
+			if(j==0){ 
+				realsign = a;
+			}else{
+				imagsign=a;
+			}
+ 
+        }else if ((Character.isDigit(a))&&(j==0)){   
+          
+			realsign = '+';
+        }   
+    } 
+	String c = "";
+	
+	if (realsign=='-'){
+		for(int k=1;k<num.length()-1;k++){
+		char b = num.charAt(k);
+		 c += b;
+		
+		}
+	
+	
+	}else{
+		c=num;
+		}
+	
+	
+	
+				String [] s = c.split("[-+*/]");
 					
 						System.out.println("real: " + s[0]);
 						System.out.println("imag: " + s[1]);
 						
 						String [] imagarr = s[1].split("i");
 						System.out.println("imag: " + imagarr[0]);
-						double real = Double.parseDouble(s[0]);
-						double imag = Double.parseDouble(imagarr[0]);
+						double realnum = Double.parseDouble(s[0]);
+						double imagnum = Double.parseDouble(imagarr[0]);
+						
+						double real=0;
+						double imag=0;
+						
+						if (realsign=='+'){
+							real = realnum;
+						}else{
+							real = -realnum;
+						}
+						
+						if (imagsign=='+'){
+							imag = imagnum;
+						}else{
+							imag = -imagnum;
+						}
+						
+						
+						
+						
+						
 						System.out.println("real2: " + real);
 						System.out.println("imag2: " + imag);
+						System.out.println("real sign:"+realsign);
+						System.out.println("imag sign:"+imagsign);
 						Complex c2 = new Complex(real,imag);
-					
 				
+
+					//getSeperate(num);
 				
                 generateJuliaImage(c2);
 
@@ -89,7 +156,98 @@ public class Main2 extends JPanel {
 
 	}
 
+/*
+	public void getSeperate(String s){
+		char realsign = '\0';
+		char imagsign = '\0';
+	
+	String real="";
+	String imag ="";
+	for (int i = 0; i < s.length(); i++) 
+    {
+	char a = s.charAt(i);
+      
+        if(a =='+'){
+			if(i==0){ 
+				realsign = a;
+			}else{
+				imagsign=a;
+			}
+		  
+        }else if(a=='-'){
 
+			if(i==0){ 
+				realsign = a;
+			}else{
+				imagsign=a;
+			}
+ 
+        }else if ((Character.isDigit(a))&&(i==0)){   
+          
+			realsign = '+';
+        }   
+    } 
+
+		System.out.println("real sign:"+realsign);
+    System.out.println("imag sign:"+imagsign);
+    // return total;
+	
+	for (int j=0;j<s.length();j++){
+	
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+
+    for (int i = 0; i < str.length(); i++) 
+    {
+        char a = str.charAt(i);
+        if (Character.isDigit(a)) 
+        {
+           char b = str.charAt(i+1);
+		   if (Character.isDigit(b)){
+				imag = imag + a;
+			
+			
+		   }else{
+				real = real + a;
+		   }
+		   
+		   
+		}else if (Character.isLetter(a)){   
+			continue;
+        } 
+        
+        else
+        {
+			if (i==0){
+				realsign = a;
+			}else{
+				imagsign = a;
+			}
+            //symbol = symbol + a;
+        }
+    }
+	
+	double real2 = Double.parseDouble(real);
+	double imag2 = Double.parseDouble(imag);
+    System.out.println("real part:"+real2);
+    System.out.println("imag part:"+imag2);
+	System.out.println("real sign:"+realsign);
+    System.out.println("imag sign:"+imagsign);
+	
+
+	
+    
+
+}
+	*/
+	
     public void paintComponent(Graphics g) { 
 	/* call the paintComponent from super class
 	 * sets up the window 
